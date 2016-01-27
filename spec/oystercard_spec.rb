@@ -10,13 +10,7 @@
       expect(card.balance).to eq 0
     end
 
-    describe 'journey_history' do
-      it 'displays an empty journey history when new' do
-      expect(card.journey_history).to eq ({}) 
-      #other way woud be 
-      #expect(card.journey_history.empty?).to eq true 
-      end
-    end
+ 
 
 
 
@@ -43,52 +37,7 @@
 
     end
 
-    describe 'touching in and out' do
 
-      context 'have money on card' do
-
-        before do
-          card.top_up(1)
-        end
-
-        context '#in_journey?' do
-          it 'new card isn\'t in journey' do
-            expect(card.in_journey?).to eq false
-          end
-        end
-
-
-        context '#touch_in' do
-          it 'has touched in at entry_station' do
-            card.touch_in(entry_station)
-            expect(card.in_journey?).to eq true
-          end
-        
-
-        it 'remembers entry station' do
-         card.touch_in(entry_station)
-         expect(card.entry_station).to eq entry_station
-       end
-
-   end
-
-    context '#touch_out' do
-      it 'has touched out at station' do
-        card.touch_out(exit_station)
-        expect(card.in_journey?).to eq false
-      end
-
-      it 'charges for the journey' do
-        card.touch_in(entry_station)
-        expect {card.touch_out(exit_station)}.to change{card.balance}.by(-OysterCard::MINIMUM_AMOUNT)
-      end
-
-      it 'remembers exit_station after checking out' do
-        card.touch_out(exit_station)
-        expect(card.exit_station).to eq exit_station
-      end   
-    end
-   end 
 
        context "#journey_history" do
       it 'records the journey history of a user' do
